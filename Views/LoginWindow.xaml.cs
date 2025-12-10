@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using trabalhoPOO.Models.Entidades;
+using trabalhoPOO.ViewModels;
 
 namespace trabalhoPOO.Views
 {
@@ -7,14 +10,21 @@ namespace trabalhoPOO.Views
     /// </summary>
     public partial class LoginWindow : Window
     {
-        public LoginWindow()
+        public LoginWindow(LoginManager loginManager)
         {
+            if (loginManager is null) throw new ArgumentNullException(nameof(loginManager));
+
             InitializeComponent();
+
+            var viewModel = new LoginViewModel(loginManager);
+
+            DataContext = viewModel;
         }
 
+        
         private void InitializeComponent()
         {
-            throw new NotImplementedException();
+           this.DataContext = this;
         }
     }
 }

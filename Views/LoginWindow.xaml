@@ -8,13 +8,22 @@
         Title="LoginWindow" Height="450" Width="800">
     <Grid>
         
-        <StackPanel Background="Gray" Width="200px" Height="120px" >
+        <StackPanel Background="Gray" Width="200px" Margin="300,157,300,117" >
             <Label Content="Username"></Label>
             <TextBox Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Label Content="Password"></Label>
-            <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <Button Content="Login" Command="{Binding LoginCommand}" CommandParameter="{Binding Username}" />
+            <PasswordBox x:Name="PasswordBoxField"/>
+
+            <Button Content="Login" 
+                    Command="{Binding LoginCommand}"
+                    Margin="0,15,0,0">
+
+                <Button.CommandParameter>
+                    <Binding ElementName="PasswordBoxField"/>
+                </Button.CommandParameter>
+            </Button>
+          <!--<Button Content="Login" Command="{Binding LoginCommand}" CommandParameter="{Binding Username}" />-->
 
         </StackPanel>
     </Grid>

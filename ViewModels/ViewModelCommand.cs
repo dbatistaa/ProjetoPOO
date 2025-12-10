@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using trabalhoPOO.Models.Entidades;
 
 namespace trabalhoPOO.ViewModels
 {

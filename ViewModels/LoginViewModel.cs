@@ -41,11 +41,11 @@ namespace trabalhoPOO.ViewModels
 
         public LoginViewModel(LoginManager gestorLogin)
         {
-            // LoginCommand = new ViewModelCommand(ExecuteLoginCommand);
+           
 
             _loginManager = gestorLogin;
 
-            // 2. Inicializa o comando, que agora pode usar _gestorLogin
+            
             LoginCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
         }
 
@@ -55,7 +55,6 @@ namespace trabalhoPOO.ViewModels
             //     UserRepository userRepositoyr = new UserRepository();
 
             PasswordBox passwordBox = parameter as PasswordBox;
-            // Console.WriteLine("Login Done");
 
             if (passwordBox != null)
             {
@@ -63,7 +62,7 @@ namespace trabalhoPOO.ViewModels
 
                 if (string.IsNullOrWhiteSpace(senha))
                 {
-                    // Tratar erro (senha vazia)
+                    
                     return;
                 }
 
@@ -72,7 +71,7 @@ namespace trabalhoPOO.ViewModels
 
                 if (utilizadorAutenticado != null)
                 {
-                    // Login bem-sucedido
+                    
                     Console.WriteLine("Login Done");
                 }
                 else
@@ -82,8 +81,8 @@ namespace trabalhoPOO.ViewModels
             }
             else
             {
-                // Se o CommandParameter não foi passado corretamente
-                Console.WriteLine("Erro ao passar a senha.");
+                
+                Console.WriteLine("Password Inválida.");
             }
 
 
@@ -91,8 +90,7 @@ namespace trabalhoPOO.ViewModels
 
         private bool CanExecuteLoginCommand(object parameter)
         {
-            // O comando só é permitido se o campo Username/Email não estiver vazio
-            // O 'parameter' não é usado aqui, mas é obrigatório na assinatura
+            
             return !string.IsNullOrWhiteSpace(Username);
         }
     }

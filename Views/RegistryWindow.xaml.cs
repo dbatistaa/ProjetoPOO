@@ -10,13 +10,13 @@ namespace trabalhoPOO.Views
     public partial class RegistryWindow : Window
     {
         
-        public RegistryWindow(LoginManager loginManager)
+        public RegistryWindow(RegistryManager registryManager)
         {
             InitializeComponent();
          
-            RegistryViewModel viewModel = new RegistryViewModel(loginManager);
+            RegistryViewModel viewModel = new RegistryViewModel(RegistryManager);
 
-            this.DataContext = new RegistryViewModel(loginManager);
+            this.DataContext = new RegistryViewModel(registryManager);
         }
 
     }

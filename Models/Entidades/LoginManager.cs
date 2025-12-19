@@ -24,17 +24,26 @@ namespace trabalhoPOO.Models.Entidades
 
         public Utilizador Autenticar(string email, string Password)
         {
-            // Procurar o Utilizador pelo Email
+            
             Utilizador utilizador = _users.FirstOrDefault(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
 
-            //Se o Utilizador não for encontrado ou se a senha estiver incorreta
+            
             if (utilizador == null || !utilizador.VerifyPassword(Password))
             {
                 return null;
             }
 
+            var user = _users.FirstOrDefault(u => u.Email == email);
+            if (user != null && user.VerifyPassword(Password))
+            {
+                return user;
+            }
+            return null;
+
             //Se as credenciais forem válidas
             return utilizador;
+
+
         }
     }
 }

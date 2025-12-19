@@ -8,7 +8,7 @@
         Title="LoginWindow" Height="450" Width="800">
     <Grid>
         
-        <StackPanel Background="Gray" Margin="260,141,252,128" >
+        <StackPanel Background="Gray" Margin="260,141,311,134" >
             <Label Content="Username"></Label>
             <TextBox Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Label Content="Password"></Label>
@@ -16,7 +16,7 @@
             <Label Content="Repeat Password"></Label>
             <TextBox Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <Button Content="Register" Command="{Binding LoginCommand}" CommandParameter="{Binding Username}" />
+            <Button Content="Registar" Command="{Binding RegisterCommand}" />
 
         </StackPanel>
     </Grid>

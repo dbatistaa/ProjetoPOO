@@ -21,10 +21,5 @@ namespace trabalhoPOO.Views
             DataContext = viewModel;
         }
 
-        
-        private void InitializeComponent()
-        {
-           this.DataContext = this;
-        }
     }
 }

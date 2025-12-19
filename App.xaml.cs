@@ -1,4 +1,4 @@
-﻿using Projeto.Views;
+﻿using trabalhoPOO.Views;
 using System.Windows;
 using trabalhoPOO.Models.Entidades;
 using trabalhoPOO.ViewModels;

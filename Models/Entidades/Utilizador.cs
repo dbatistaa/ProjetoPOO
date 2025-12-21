@@ -18,7 +18,7 @@
         public Utilizador(string email, string Password, string nivelAcesso, int idUser)
         {
             Email = email;
-            // Na prática: deve usar uma biblioteca de hashing aqui (ex: BCrypt.Net)
+            
             PasswordHash = HashSenha(Password);
             NivelAcesso = nivelAcesso;
             IdPessoaAssociada = idUser;

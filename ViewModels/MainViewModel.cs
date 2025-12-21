@@ -14,6 +14,8 @@ namespace trabalhoPOO.ViewModels
         private readonly Utilizador _user;
         public ObservableCollection<Utilizador> ListaUtilizadores { get; set; }
 
+        public Utilizador CurrentUser { get; set; }
+
         public string InfoUtilizador => $"Utilizador: {_user.Email} | Perfil: {_user.NivelAcesso}";
 
 
@@ -26,9 +28,11 @@ namespace trabalhoPOO.ViewModels
         public MainViewModel(Utilizador user)
         {
             _user = user;
+            CurrentUser = user;
 
             var listaDoFicheiro = DataStorage.CarregarUtilizadores();
             ListaUtilizadores = new ObservableCollection<Utilizador>(listaDoFicheiro);
+
         }
     }
 }

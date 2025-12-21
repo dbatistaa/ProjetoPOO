@@ -12,9 +12,17 @@
                       IsReadOnly="True" 
                       AlternatingRowBackground="#F0F0F0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID Pessoa" Binding="{Binding IdPessoaAssociada}" Width="80"/>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
                     <DataGridTextColumn Header="Cargo" Binding="{Binding NivelAcesso}" Width="120"/>
+
+                    <DataGridTemplateColumn Header="Ação" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Selecionar" Click="BtnSelecionar_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

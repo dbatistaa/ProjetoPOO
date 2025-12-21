@@ -9,9 +9,15 @@ namespace trabalhoPOO.ViewModels
 
         public ListUsersViewModel()
         {
-            // Carrega os dados persistidos no ficheiro
-            var dados = DataStorage.CarregarUtilizadores();
-            ListaUtilizadores = new ObservableCollection<Utilizador>(dados);
+            
+            var allUsers = DataStorage.CarregarUtilizadores();
+
+          
+            var tenantsOnly = allUsers
+                .Where(u => u.NivelAcesso == "Inquilino")
+                .ToList();
+
+            ListaUtilizadores = new ObservableCollection<Utilizador>(tenantsOnly);
         }
     }
 }

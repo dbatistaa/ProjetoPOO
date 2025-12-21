@@ -14,9 +14,7 @@ using trabalhoPOO.Views;
 
 namespace trabalhoPOO
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+   
     public partial class MainWindow : Window
     {
         private readonly ImovelManager _imovelManager;
@@ -57,10 +55,44 @@ namespace trabalhoPOO
                 return;
             }
 
-            var vm = new AddImovelViewModel(manager);
-            var addWin = new AddImovelWindow();
-            addWin.DataContext = vm;
-            addWin.ShowDialog();
+            int userId = -1;
+
+           
+            if (this.DataContext is MainViewModel mainVM && mainVM.CurrentUser != null)
+            {
+                userId = mainVM.CurrentUser.Id;
+            }
+            
+            else if (this.DataContext is Utilizador user)
+            {
+                userId = user.Id;
+            }
+
+           
+            if (userId != -1)
+            {
+               
+                var vm = new AddImovelViewModel(manager, userId);
+                var addWin = new AddImovelWindow();
+                addWin.DataContext = vm;
+                addWin.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Erro: Não foi possível identificar o utilizador logado.");
+            }
+        }
+        private void BtnVerMeusImoveis_Click(object sender, RoutedEventArgs e)
+        {
+            var listWin = new ListImoveisWindow();
+
+           
+            if (this.DataContext is MainViewModel mainVM)
+            {
+                listWin.DataContext = new ListImoveisViewModel(mainVM.CurrentUser.Id);
+                listWin.Owner = this;
+                listWin.ShowDialog();
+            }
         }
     }
 }

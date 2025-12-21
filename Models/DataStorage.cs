@@ -4,12 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using trabalhoPOO.Models.Entidades;
 
-namespace trabalhoPOO 
+namespace trabalhoPOO
 {
     public static class DataStorage
     {
-
-        private static string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "utilizadores.json");
+        private static string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "utilizadores.json");
         private static string imoveisPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "imoveis.json");
 
         #region GuardaUtilizadores
@@ -22,7 +21,7 @@ namespace trabalhoPOO
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show("Erro ao guardar: " + ex.Message);
+                System.Windows.MessageBox.Show("Erro ao guardar utilizadores: " + ex.Message);
             }
         }
 
@@ -39,23 +38,33 @@ namespace trabalhoPOO
                 return new List<Utilizador>();
             }
         }
-
         #endregion
 
         #region GuardarImoveis
 
         public static void SalvarImoveis(List<Imovel> lista)
         {
-            string json = JsonConvert.SerializeObject(lista, Formatting.Indented);
-            File.WriteAllText(imoveisPath, json);
+            try
+            {
+                string json = JsonConvert.SerializeObject(lista, Formatting.Indented);
+                File.WriteAllText(imoveisPath, json);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show("Erro ao guardar imóveis: " + ex.Message);
+            }
         }
 
         public static List<Imovel> CarregarImoveis()
         {
             try
             {
-                if (!File.Exists(filePath)) return new List<Imovel>();
-                string json = File.ReadAllText(filePath);
+               
+                if (!File.Exists(imoveisPath)) return new List<Imovel>();
+
+                string json = File.ReadAllText(imoveisPath);
+
+                
                 return JsonConvert.DeserializeObject<List<Imovel>>(json) ?? new List<Imovel>();
             }
             catch

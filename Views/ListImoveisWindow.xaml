@@ -1,0 +1,72 @@
+﻿<Window x:Class="trabalhoPOO.Views.ListImoveisWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Lista de Imóveis Registados" Height="450" Width="900" 
+        WindowStartupLocation="CenterOwner">
+    <Grid Margin="15">
+        <DockPanel>
+            <TextBlock Text="Imóveis no Sistema" 
+                       DockPanel.Dock="Top" 
+                       FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Filtrar por Tipo: " VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <ComboBox Width="150" 
+                          ItemsSource="{Binding AvailableTypes}" 
+                          SelectedItem="{Binding SelectedType, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+
+            <DataGrid ItemsSource="{Binding ListaImoveis}" 
+                      AutoGenerateColumns="False" 
+                      IsReadOnly="True" 
+                      AlternatingRowBackground="#F0F0F0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="40"/>
+                    <DataGridTextColumn Header="Morada" Binding="{Binding Morada}" Width="*"/>
+                    <DataGridTextColumn Header="Tipo" Binding="{Binding TipoImovel}" Width="90"/>
+                    <DataGridTextColumn Header="Renda (€)" Binding="{Binding ValorRenda}" Width="80"/>
+
+                    <DataGridTemplateColumn Header="Estado / Inquilino" Width="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel VerticalAlignment="Center" Margin="5,0">
+                                    <TextBlock Text="{Binding InquilinoStatus}" 
+                                               Foreground="{Binding StatusColor}" 
+                                               FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding NomeInquilino}" 
+                                               FontSize="10" Foreground="Gray" 
+                                               TextTrimming="CharacterEllipsis"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Ações" Width="240">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Arrendar" 
+                                            Click="BtnArrendar_Click"
+                                            Visibility="{Binding BotaoArrendarVisibility}"
+                                            Background="MediumSeaGreen" Foreground="White" 
+                                            Padding="8,2" Margin="0,0,5,0"/>
+
+                                    <Button Content="Libertar" 
+                                            Click="BtnLibertar_Click"
+                                            Visibility="{Binding BotaoLibertarVisibility}"
+                                            Background="Orange" Foreground="Black" 
+                                            Padding="8,2" Margin="0,0,5,0"/>
+
+                                    <Button Content="Remover" 
+                                            Click="BtnRemover_Click"
+                                            Background="Crimson" Foreground="White" 
+                                            FontWeight="Bold" Padding="8,2"/>
+                                </StackPanel>
+                            </DataTemplate>         
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Grid>
+</Window>

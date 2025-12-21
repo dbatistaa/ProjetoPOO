@@ -23,5 +23,11 @@ namespace trabalhoPOO.Views
         {
             InitializeComponent();
         }
+
+        private void BtnVoltar_Click(object sender, RoutedEventArgs e)
+        {
+         
+            this.Close();
+        }
     }
 }

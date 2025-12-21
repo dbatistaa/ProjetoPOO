@@ -1,37 +1,27 @@
-﻿using trabalhoPOO.Views;
+﻿using System.Collections.Generic;
 using System.Windows;
 using trabalhoPOO.Models.Entidades;
-using trabalhoPOO.ViewModels;
 using trabalhoPOO.Views;
-
 
 namespace trabalhoPOO
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            
+         
+            List<Utilizador> allUsers = DataStorage.CarregarUtilizadores();
 
-            List<Utilizador> AllUsers = new List<Utilizador>();
-            LoginManager LoginManager = new LoginManager(AllUsers);
+     
+            RegistryManager regManager = new RegistryManager(allUsers);
+            var registryView = new trabalhoPOO.Views.RegistryWindow(regManager);
 
-            RegistryWindow registryView = new RegistryWindow(LoginManager);
 
-            // 3. Mostrar a RegistryWindow
-            registryView.Show();
-
-            
             this.MainWindow = registryView;
-            this.ShutdownMode = ShutdownMode.OnMainWindowClose;
+            this.ShutdownMode = ShutdownMode.OnLastWindowClose;
+            registryView.Show();
         }
-
-
     }
-
 }

@@ -1,43 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media.Animation;
 using trabalhoPOO.Models.Entidades;
 
 namespace trabalhoPOO.Models.Entidades
 {
     public class RegistryManager
     {
-        private List<Utilizador> _utilizadores;
-        private static int _proximoId = 1;
+        private List<Utilizador> _users;
 
-        public RegistryManager(List<Utilizador> utilizadores)
+        public List<Utilizador> Users => _users;
+
+        public RegistryManager(List<Utilizador> users)
         {
-            _utilizadores = utilizadores;
+            _users = users ?? new List<Utilizador>();
         }
 
-        public bool Registrar(string email, string password, string nivelAcesso, int idPessoa)
+        public bool Registrar(string email, string password, string nivel, int idPessoa)
         {
-           
-            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
-                return false;
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) return false;
 
-           
-            if (_utilizadores.Any(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase)))
-                return false;
+            // Verifica se o email já existe
+            if (_users.Any(u => u.Email == email)) return false;
 
             try
             {
                 
-                Utilizador novo = new Utilizador(email, password, nivelAcesso, idPessoa);
-
-               
-                novo.Id = _proximoId++;
-
-                _utilizadores.Add(novo);
+                Utilizador novo = new Utilizador(email, password, nivel, idPessoa);
+                _users.Add(novo);
                 return true;
             }
             catch

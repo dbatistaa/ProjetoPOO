@@ -10,16 +10,33 @@ namespace trabalhoPOO.Views
     /// </summary>
     public partial class LoginWindow : Window
     {
+        private readonly LoginManager _loginManager;
+
+
         public LoginWindow(LoginManager loginManager)
         {
-            if (loginManager is null) throw new ArgumentNullException(nameof(loginManager));
-
             InitializeComponent();
+            var vm = new LoginViewModel(loginManager);
+            this.DataContext = vm;
 
-            var viewModel = new LoginViewModel(loginManager);
+            // 1. Redirecionar para o Login (Sucesso)
+            vm.OnLoginSuccess += (user) => {
+                MainWindow mainWin = new MainWindow();
+                mainWin.DataContext = new MainViewModel(user);
+                Application.Current.MainWindow = mainWin;
+                mainWin.Show();
+                this.Close();
+            };
 
-            DataContext = viewModel;
+            
+            vm.OnRequestRegistry += () => {
+               
+                var regMng = new RegistryManager(loginManager._users);
+                RegistryWindow regWin = new RegistryWindow(regMng);
+                regWin.Show();
+                this.Close();
+            };
+
         }
-
     }
 }

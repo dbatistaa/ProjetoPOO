@@ -1,40 +1,64 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using trabalhoPOO.Models.Entidades;
+﻿using System.Windows;
 using System.Windows.Input;
+using trabalhoPOO.Models.Entidades;
+using trabalhoPOO.ViewModels;
 
 namespace trabalhoPOO.ViewModels
 {
-    public ICommand RegisterCommand { get; }
     public class RegistryViewModel
     {
-        private readonly RegistryManager _manager;
+        private readonly RegistryManager _registryManager;
+        public event Action OnRequestLogin;
+
 
         public string Email { get; set; }
-        public string Password { get; set; }
-        public string NivelAcesso { get; set; } = "Inquilino"; // Valor por defeito
+        public string NivelAcesso { get; set; }
+        public string IdPessoa { get; set; } 
 
         public ICommand RegisterCommand { get; }
 
-        public RegistryViewModel(RegistryManager manager)
+        public ICommand GoToLoginCommand { get; } 
+
+        public RegistryViewModel(RegistryManager registryManager)
         {
-            _manager = manager;
-            RegisterCommand = new RelayCommand(ExecuteRegister);
+            _registryManager = registryManager;
+            RegisterCommand = new RelayCommand<object>(ExecuteRegister);
+
+            GoToLoginCommand = new RelayCommand<object>(obj => OnRequestLogin?.Invoke());
         }
 
-        private void ExecuteRegister()
+        #region Registar User
+
+        private void ExecuteRegister(object parameter)
         {
-            // Aqui usas o teu RegistryManager que criamos antes
-            bool sucesso = _manager.Registrar(Email, Password, NivelAcesso, 0);
+            var passwordBox = parameter as System.Windows.Controls.PasswordBox;
+            string password = passwordBox?.Password;
+
+            
+            if (!int.TryParse(IdPessoa, out int idPessoaInt))
+            {
+                MessageBox.Show("O ID da Pessoa deve ser um número.");
+                return;
+            }
+
+            
+            bool sucesso = _registryManager.Registrar(Email, password, NivelAcesso, idPessoaInt);
 
             if (sucesso)
             {
-                // Lógica para fechar janela ou mostrar mensagem
-                System.Windows.MessageBox.Show("Registado com sucesso!");
+                DataStorage.SalvarUtilizadores(_registryManager.Users);
+
+                MessageBox.Show("Conta criada com sucesso!");
+                OnRequestLogin?.Invoke();
+
+            }
+            else
+            {
+                MessageBox.Show("Erro ao registar. Verifique se o email já existe.");
             }
         }
+        #endregion
+
+
     }
 }

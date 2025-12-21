@@ -20,5 +20,10 @@ namespace trabalhoPOO
         {
             InitializeComponent();
         }
+        private void BtnSair_Click(object sender, RoutedEventArgs e)
+        {
+           
+            Application.Current.Shutdown();
+        }
     }
 }

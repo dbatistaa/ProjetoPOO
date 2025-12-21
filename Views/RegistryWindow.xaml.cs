@@ -4,20 +4,27 @@ using trabalhoPOO.ViewModels;
 
 namespace trabalhoPOO.Views
 {
-    /// <summary>
-    /// Lógica interna para RegistryWindow.xaml
-    /// </summary>
     public partial class RegistryWindow : Window
     {
-        
-        public RegistryWindow(RegistryManager registryManager)
+        public RegistryWindow(RegistryManager manager)
         {
             InitializeComponent();
-         
-            RegistryViewModel viewModel = new RegistryViewModel(RegistryManager);
+            var vm = new RegistryViewModel(manager);
+            this.DataContext = vm;
 
-            this.DataContext = new RegistryViewModel(registryManager);
+
+            vm.OnRequestLogin += () =>
+            {
+
+                var loginMng = new LoginManager(manager.Users);
+
+                LoginWindow loginWin = new LoginWindow(loginMng);
+
+                Application.Current.MainWindow = loginWin;
+
+                loginWin.Show();
+                this.Close(); 
+            };
         }
-
     }
 }

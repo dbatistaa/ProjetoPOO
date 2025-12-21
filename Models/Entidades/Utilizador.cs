@@ -13,6 +13,8 @@
         #endregion
 
 
+        public Utilizador() { }
+
         public Utilizador(string email, string Password, string nivelAcesso, int idUser)
         {
             Email = email;

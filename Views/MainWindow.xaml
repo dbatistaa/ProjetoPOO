@@ -1,7 +1,7 @@
 ﻿<Window x:Class="trabalhoPOO.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Sistema de Gestão Imobiliária" Height="500" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Sistema de Gestão de Condominios" Height="500" Width="800" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <Border DockPanel.Dock="Top" Background="#007ACC" Padding="15">
             <DockPanel>

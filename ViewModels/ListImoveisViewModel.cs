@@ -11,7 +11,7 @@ namespace trabalhoPOO.ViewModels
         public ObservableCollection<Imovel> ListaImoveis { get; set; }
 
        
-        public List<string> AvailableTypes { get; } = new List<string> { "All", "Apartamento", "Moradia", "Quarto" };
+        public List<string> AvailableTypes { get; } = new List<string> { "All", "Apartamento", "Garagem" };
 
         private string _selectedType = "All";
         public string SelectedType

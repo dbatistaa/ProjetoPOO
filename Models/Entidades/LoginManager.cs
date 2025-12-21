@@ -6,11 +6,14 @@ namespace trabalhoPOO.Models.Entidades
 {
     public class LoginManager
     {
-        public List<Utilizador> _users;
+
+        private List<Utilizador> _users;
+
+        public List<Utilizador> Users => _users;
 
         public LoginManager(List<Utilizador> AllUsers)
         {
-            _users = AllUsers;
+            _users = AllUsers ?? new List<Utilizador>();
         }
 
         public LoginManager()

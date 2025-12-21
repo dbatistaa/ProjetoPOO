@@ -21,12 +21,18 @@ namespace trabalhoPOO.Models.Entidades
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) return false;
 
             // Verifica se o email já existe
-            if (_users.Any(u => u.Email == email)) return false;
+            if (_users.Any(u => u.Email.Equals(email, StringComparison.OrdinalIgnoreCase))) return false;
+
+            int novoId = _users.Any() ? _users.Max(u => u.Id) + 1 : 1;
 
             try
             {
                 
-                Utilizador novo = new Utilizador(email, password, nivel, idPessoa);
+                Utilizador novo = new Utilizador(email, password, nivel, novoId);
+
+               
+                novo.Id = novoId;
+
                 _users.Add(novo);
                 return true;
             }

@@ -7,7 +7,7 @@
 
         public string Username {  get; set; }
         public string Email { get; set; }
-        public string PasswordHash { get; private set; }
+        public string PasswordHash { get; set; }
         public string NivelAcesso { get; set; } //Proprietario ou Inquilino
         public int IdPessoaAssociada { get; set; }
         #endregion
@@ -25,14 +25,15 @@
         }
 
 
-        private string HashSenha(string Password)
+        private string HashSenha(string password)
         {
 
-            return "HASH_" + Password.GetHashCode().ToString();
+            var textBytes = System.Text.Encoding.UTF8.GetBytes(password);
+            return System.Convert.ToBase64String(textBytes);
         }
 
 
-        //Verifica se a Password fornecida corresponde à hash guardada
+       
         public bool VerifyPassword(string Password)
         {
             return PasswordHash == HashSenha(Password);

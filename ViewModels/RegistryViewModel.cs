@@ -22,9 +22,13 @@ namespace trabalhoPOO.ViewModels
         public RegistryViewModel(RegistryManager registryManager)
         {
             _registryManager = registryManager;
-            RegisterCommand = new RelayCommand<object>(ExecuteRegister);
 
+            IdPessoa = "Gerado automaticamente";
+
+            RegisterCommand = new RelayCommand<object>(ExecuteRegister);
             GoToLoginCommand = new RelayCommand<object>(obj => OnRequestLogin?.Invoke());
+
+
         }
 
         #region Registar User
@@ -34,15 +38,9 @@ namespace trabalhoPOO.ViewModels
             var passwordBox = parameter as System.Windows.Controls.PasswordBox;
             string password = passwordBox?.Password;
 
-            
-            if (!int.TryParse(IdPessoa, out int idPessoaInt))
-            {
-                MessageBox.Show("O ID da Pessoa deve ser um número.");
-                return;
-            }
 
-            
-            bool sucesso = _registryManager.Registrar(Email, password, NivelAcesso, idPessoaInt);
+
+            bool sucesso = _registryManager.Registrar(Email, password, NivelAcesso, 0);
 
             if (sucesso)
             {

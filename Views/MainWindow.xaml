@@ -17,10 +17,14 @@
             <StackPanel Visibility="{Binding VisibilidadeProprietario}">
                 <TextBlock Text="Gestão de Imóveis (Proprietário)" FontSize="20" Margin="0,0,0,20"/>
                 <UniformGrid Columns="2">
-                    <Button Content="Adicionar Novo Imóvel" Height="100" Margin="10"/>
+                    <Button Content="Adicionar Novo Imóvel" Height="100" Margin="10" Click="BtnAddImovel_Click"/>
                     <Button Content="Ver Meus Imóveis" Height="100" Margin="10"/>
                     <Button Content="Validar Pagamentos" Height="100" Margin="10"/>
                     <Button Content="Relatórios de Despesas" Height="100" Margin="10"/>
+                    <Button Content="Consultar Utilizadores" 
+                         Click="BtnListar_Click"
+                         Visibility="{Binding VisibilidadeProprietario}" 
+                         Width="150" Height="30"/>
                 </UniformGrid>
             </StackPanel>
 
